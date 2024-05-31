@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Register from './pages/Register';
 import { Toaster } from "react-hot-toast";
@@ -17,6 +17,10 @@ import Appointments from './pages/Appointments';
 import DoctorAppointments from './pages/Doctor/DoctorAppointments';
 function App() {
     const {loading} =useSelector(state => state.alerts);
+    const [message , setMessage] = useState(""); 
+    useEffect(() =>{
+        fetch("http://localhost:5000").then(res => res.json()).then(data =>setMessage(data.message));
+    },[]);
 return (
 <BrowserRouter>
 {loading && (<div className='spinner-parent'>
